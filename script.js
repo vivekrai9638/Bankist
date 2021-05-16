@@ -225,7 +225,7 @@ const curFormat = function (curr) {
 //==================== Timer ==================//
 
 const logOutTimer = function () {
-  let sec = 15;
+  let sec = 300;
 
   const tick = function () {
     labelTimer.textContent = `${String(Math.trunc(sec / 60)).padStart(
@@ -260,22 +260,21 @@ let currentAcc, timer;
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
 
-  loginPanel.style.transform = 'translateX(200%)';
-  logoutPanel.style.transform = 'translateX(0%)';
-  banner.style.transform = 'translateX(500%)';
-
   currentAcc = accounts.find(acc => acc.username === inputLoginUsername.value);
 
   if (+inputLoginPin.value === currentAcc.pin) {
+    loginPanel.style.transform = 'translateX(200%)';
+    logoutPanel.style.transform = 'translateX(0%)';
+    banner.style.transform = 'translateX(500%)';
+
     //Display UI Message and UI
 
     labelWelcome.textContent = `Welcome Back ${
       currentAcc.owner.split(' ')[0]
     }!`;
+    containerApp.style.opacity = 100;
+    updateUI(currentAcc);
   }
-  containerApp.style.opacity = 100;
-
-  updateUI(currentAcc);
 
   // clear inputs
   inputLoginUsername.value = inputLoginPin.value = '';
